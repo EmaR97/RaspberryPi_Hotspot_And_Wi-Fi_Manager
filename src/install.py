@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 # Constants
-DEFAULT_HOTSPOT_NAME = "IPS"
+DEFAULT_HOTSPOT_NAME = "RaspHotspot"
 DEFAULT_HOTSPOT_PASSWORD = "password"
 SERVICE_NAME = "hotspot.service"
 APP_DIRECTORY = "config_wifi_page"
