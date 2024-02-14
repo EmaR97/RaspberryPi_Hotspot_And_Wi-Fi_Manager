@@ -14,7 +14,7 @@ To set up the project on your Raspberry Pi, follow these steps:
    arguments are provided, default values will be used (SSID: RaspHotspot, PASS: password).
 
     ```bash
-    sudo python3 src/install.py [hotspot_name hotspot_password]
+    sudo python3 -B src/install.py [hotspot_name hotspot_password]
     ```
 
 4. Follow the prompts to set up the Wi-Fi hotspot and configure the auto-run service.
@@ -38,7 +38,7 @@ To remove the Wi-Fi configuration page and associated services:
 1. Run the uninstallation script:
 
     ```bash
-    sudo python src/uninstall.py
+    sudo python -B src/uninstall.py
     ```
 
 This will remove all configurations and settings made during installation.
