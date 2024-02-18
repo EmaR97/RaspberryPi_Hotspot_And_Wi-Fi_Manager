@@ -3,13 +3,8 @@ import shutil
 import subprocess
 import sys
 
-# Constants
-DEFAULT_HOTSPOT_NAME = "RaspHotspot"
-DEFAULT_HOTSPOT_PASSWORD = "password"
-SERVICE_NAME = "hotspot.service"
-APP_DIRECTORY = "config_wifi_page"
-ETC_APP_DIRECTORY = "/etc/config_wifi_page"
-REQUIREMENTS_FILE = "../requirements.txt"
+from src.config_wifi_page.constants import DEFAULT_HOTSPOT_NAME, DEFAULT_HOTSPOT_PASSWORD, SERVICE_NAME, APP_DIRECTORY, \
+    ETC_APP_DIRECTORY, REQUIREMENTS_FILE, WIFI_DEVICE
 
 
 def check_root():
@@ -60,7 +55,7 @@ def setup_hotspot(hotspot_name, hotspot_password):
     """Create the Wi-Fi hotspot and modify the connection to autoconnect."""
     create_hotspot = subprocess.run(
         ['nmcli', 'device', 'wifi', 'hotspot', 'ssid', hotspot_name, 'con-name', hotspot_name, 'password',
-         hotspot_password, 'ifname', 'wlan0'], capture_output=True, text=True)
+         hotspot_password, 'ifname', WIFI_DEVICE], capture_output=True, text=True)
     if create_hotspot.returncode != 0:
         print("Error creating hotspot:", create_hotspot.stderr)
         exit(1)

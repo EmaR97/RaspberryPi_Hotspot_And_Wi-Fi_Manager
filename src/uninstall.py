@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 
-from install import SERVICE_NAME, ETC_APP_DIRECTORY, DEFAULT_HOTSPOT_NAME
+from src.config_wifi_page.constants import DEFAULT_HOTSPOT_NAME, SERVICE_NAME, ETC_APP_DIRECTORY
 
 
 def stop_and_disable_service():

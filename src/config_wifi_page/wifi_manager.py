@@ -1,7 +1,7 @@
 import subprocess
 from flask import Flask, request, render_template
 
-WIFI_DEVICE = "wlan0"
+from src.config_wifi_page.constants import WIFI_DEVICE
 
 app = Flask(__name__, template_folder='custom_templates')
 
