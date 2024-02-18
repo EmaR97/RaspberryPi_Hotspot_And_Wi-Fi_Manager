@@ -1,8 +1,9 @@
 import subprocess
-
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 WIFI_DEVICE = "wlan0"
+
+app = Flask(__name__, template_folder='custom_templates')
 
 
 def scan_wifi_networks():
@@ -16,33 +17,6 @@ def scan_wifi_networks():
     except subprocess.CalledProcessError as e:
         print(f"Error scanning Wi-Fi networks: {e}")
         return []
-
-
-def render_wifi_form(ssids):
-    """Render the Wi-Fi network selection form."""
-    options = ''.join([f'<option value="{ssid}">{ssid}</option>' for ssid in ssids])
-    form = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Wi-Fi Control</title>
-        </head>
-        <body>
-            <h1>Wi-Fi Control</h1>
-            <form action="/submit" method="post">
-                <label for="ssid">Choose a Wi-Fi network:</label>
-                <select name="ssid" id="ssid">
-                    {options}
-                </select>
-                <p/>
-                <label for="password">Password: <input type="password" name="password"/></label>
-                <p/>
-                <input type="submit" value="Connect">
-            </form>
-        </body>
-        </html>
-    """
-    return form
 
 
 def connect_to_wifi(ssid, password):
@@ -61,14 +35,18 @@ def connect_to_wifi(ssid, password):
         return f"Error connecting to Wi-Fi network: {e}"
 
 
-app = Flask(__name__)
+def reboot_computer():
+    try:
+        subprocess.run(['shutdown', '/r', '/t', '1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print("Error:", e)
 
 
 @app.route("/", methods=['GET'])
 def index():
     """Render the Wi-Fi network selection form."""
     ssids = scan_wifi_networks()
-    return render_wifi_form(ssids)
+    return render_template('index.html', ssids=ssids)
 
 
 @app.route("/submit", methods=['POST'])

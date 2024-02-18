@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Wi-Fi Control</title>
+</head>
+<body>
+<h1>Wi-Fi Control</h1>
+<form action="/submit" method="post">
+    <label for="ssid">Choose a Wi-Fi network:</label>
+    <select name="ssid" id="ssid">
+        {% for ssid in ssids %}
+            <option value="{{ ssid }}">{{ ssid }}</option>
+        {% endfor %}
+    </select>
+    <p></p>
+    <label for="password">Password: <input type="password" name="password"/></label>
+    <p></p>
+    <input type="submit" value="Connect">
+</form>
+</body>
+</html>
