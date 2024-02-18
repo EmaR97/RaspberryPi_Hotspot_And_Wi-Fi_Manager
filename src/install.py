@@ -41,7 +41,7 @@ def setup_virtualenv():
     # Copy the application folder to /etc
     full_app_dir = os.path.join(os.path.dirname(__file__), APP_DIRECTORY)
     if not os.path.exists(ETC_APP_DIRECTORY):
-        shutil.copytree(full_app_dir, ETC_APP_DIRECTORY)
+        shutil.copytree(str(full_app_dir), ETC_APP_DIRECTORY)
         print("Application folder copied to /etc")
     else:
         print("Application folder already exists in /etc")
